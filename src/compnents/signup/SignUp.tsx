@@ -6,6 +6,7 @@ import '../../style/theme.scss';
 import  "../signup/signup.module.scss"
 import { ThemeProvider, useTheme } from "../../context/ThemeProvider";
 import Switch from "react-switch";
+import { useAuth } from "../../context/AuthProvider";
 
 
 
@@ -15,6 +16,10 @@ function SignUp() {
     const passConfirmRef = React.useRef<HTMLInputElement>(null);
 
     const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false)
+
+
+    const { signup } = useAuth()
 
     const {Theme , ChangeTheme} =useTheme();
 
@@ -22,11 +27,20 @@ function SignUp() {
         return pass == passConfirm
     }
 
-    function handlSubmit(event: React.FormEvent<HTMLFormElement>) {
+    async function handlSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        auth.createUserWithEmailAndPassword(emailRef.current ? emailRef.current.value : "", passRef.current ? passRef.current.value : "")
-        console.log(emailRef.current?.value)
-
+        setError(false);
+        try {
+            setLoading(true)
+            await signup(emailRef.current ? emailRef.current.value : "", passRef.current ? passRef.current.value : "")
+            console.log("ok")
+        }
+        catch {
+            console.log("no")
+            setError(true);
+        }
+        setLoading(false)
+        
 
     }
 
@@ -52,6 +66,7 @@ function SignUp() {
                     <hr />
                 </div>
                 <div className={styles.cardContent}>
+                    
                     <form onSubmit={handlSubmit} className={styles.form}>
                         <label htmlFor="InputEmail" >Enter Your Email</label>
                         <input type="text" id="InputEmail" ref={emailRef} required />
@@ -61,9 +76,9 @@ function SignUp() {
 
                         <label htmlFor="InputPassConfirm">Enter Your Pass Again</label>
                         <input type="text" id="InputPassConfirm " ref={passConfirmRef} required />
-                        <button type="submit">Sign Up</button>
+                        <button type="submit" disabled={loading}>Sign Up</button>
                     </form>
-                    <div><label htmlFor="" >{error ? "LogIn Failed" : ""}</label></div>
+                    <div><label htmlFor="" >{error ? "Signup Failed" : ""}</label></div>
 
                 </div>
                 <div className={styles.cardTail}>

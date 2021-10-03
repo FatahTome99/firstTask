@@ -23,13 +23,16 @@ export default function LogIn() {
 
     const [error, setError] = useState(false);
     const { login } = useAuth()
+    const [loading, setLoading] = useState(false)
 
     const [LeftAlign , setLeftAlign] = useState(true);
 
     async function handlSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
+        
         setError(false);
         try {
+            setLoading(true)
             await login(emailRef.current ? emailRef.current.value : "", passRef.current ? passRef.current.value : "")
             console.log("ok")
             history.push("dashboard")
@@ -38,6 +41,7 @@ export default function LogIn() {
             console.log("no")
             setError(true);
         }
+        setLoading(false)
     }
 
     const [t, i18n] = useTranslation('common');
