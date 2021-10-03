@@ -44,6 +44,7 @@ function SignUp() {
     return (
 
         <div className={`container ${Theme}`}>
+            <div className={styles.container}>
             <div className={styles.card}>
                 <div className={styles.cardTitle}>
                     <h1>Sign Up</h1>
@@ -70,6 +71,7 @@ function SignUp() {
 
                 </div>
             </div>
+        </div>
         </div>
 
     )

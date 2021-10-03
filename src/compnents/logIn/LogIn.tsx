@@ -74,6 +74,7 @@ export default function LogIn() {
     return (
         <Suspense fallback="loading">
         <div className={`container ${Theme}`}>
+            <div className={styles.container}>
             <div className={styles.card}>
                 <div className={styles.cardTitle}>
                     <Changelanguage/>
@@ -98,6 +99,7 @@ export default function LogIn() {
 
                 <div className={styles.cardTail}>{t('LogIn.Form.Signup')}<Link to="/signup">{t('LogIn.Form.click')}</Link></div>
             </div>
+        </div>
         </div>
         </Suspense>
     )

@@ -5,10 +5,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    // background-color: red;
 
     background: var(--theme-page-background);
     color: var(--theme-page-text);
-    // border: var(--theme-page-text) 1px solid;
+    border: var(--theme-page-text) 1px solid;
+    
 }
 .card{
     // background-color: rgb(112 138 220 / 25%);
