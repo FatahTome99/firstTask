@@ -1,16 +1,23 @@
 import React, { useState, useRef, HtmlHTMLAttributes, useEffect, useLayoutEffect } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import { useHistory } from "react-router";
-import styles from "../dashbord/DashBoard.module.css"
+import styles from "../dashbord/DashBoard.module.scss"
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 // import RangeSlider from 'react-bootstrap-range-slider';
 import InputNumber from 'rc-input-number';
 import { ChromePicker, Color } from 'react-color';
 import ReactColorPicker from '@super-effective/react-color-picker';
+import { ThemeProvider, useTheme } from "../../context/ThemeProvider";
+import Switch from "react-switch";
+import '../../style/theme.scss';
+import "../dashbord/DashBoard.module.scss"
+
 
 export default function DashBoard() {
     const { logout } = useAuth()
     const history = useHistory();
+
+    const {Theme , ChangeTheme} =useTheme();
 
     const [img1opacity, setImg1opacity] = useState(1);
     const [img2opacity, setImg2opacity] = useState(1);
@@ -42,6 +49,16 @@ export default function DashBoard() {
 
     const refUpload1 = useRef(null);
     const refUpload2 = useRef(null);
+
+    function ChangeThemeCompnent(){
+        return(
+            <div>
+                {/* <button onClick={ ChangeTheme} className={styles.buttonLight}>light</button>
+                <button onClick={ ChangeTheme } className={styles.buttonDark}>dark</button> */}
+                <Switch onChange={ChangeTheme} checked={Theme=='light' ? true : false }></Switch> Light theme
+            </div>
+        )
+    }
 
     // const [img1 , setImg1] =useState("");
 
@@ -137,12 +154,13 @@ export default function DashBoard() {
     }
 
     return (
-        <div className={styles.Container}>
+        <div className={`container ${Theme}`}>
             <div className={styles.header}>
                 <h1>First Task </h1>
                 <div style={{display:"flex" , flexDirection:"row"}}>
                 <div>Chose image1<input type="file" onChange={handleImg1} /></div>
                 <div>chose image2<input type="file" onChange={handleImg2} ref={refUpload2} /></div>
+                <ChangeThemeCompnent/>
                 <button onClick ={handleLogout}>Logout</button>
                 </div>
                 

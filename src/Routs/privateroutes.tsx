@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, RouteProps, Redirect } from "react-router-dom";
-import { AuthContext } from "../src/context/AuthContext";
+import { AuthContext } from "../../src/context/AuthContext";
+
 
 const PrivateRoute: React.FC<RouteProps> = (props) => {
   return (

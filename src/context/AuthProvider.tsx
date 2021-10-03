@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 
 import { auth } from "../firebase"
 
+
 export function useAuth() {
   return useContext(AuthContext)
 }
@@ -11,7 +12,7 @@ export const AuthProvider : React.FC<{}> = ({ children }) =>  {
   const [currentUser, setCurrentUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
-
+console.log("user  " +currentUser)
   function signup(email : string, password :string) {
     return auth.createUserWithEmailAndPassword(email, password)
   }

@@ -1,0 +1,23 @@
+
+.light {
+    --theme-color: #A80000;
+    --theme-page-background: #FFF;
+    --theme-page-text: #111;
+    height: 600px;
+    /* background-color: burlywood; */
+    display: flex;
+    flex-direction: column;
+    box-sizing:border-box;
+}
+
+.dark {
+    --theme-color: #0000A8;
+    --theme-page-background: #111;
+    --theme-page-text: #FFF;
+    height: 600px;
+  /* background-color: burlywood; */
+  display: flex;
+  flex-direction: column;
+  box-sizing:border-box;
+    
+}

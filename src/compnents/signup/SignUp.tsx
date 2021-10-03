@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { auth } from "../../firebase";
-import styles from "../signup/signup.module.css"
+import styles from "../signup/signup.module.scss"
 import { Link } from "react-router-dom"
+import '../../style/theme.scss';
+import  "../signup/signup.module.scss"
+import { ThemeProvider, useTheme } from "../../context/ThemeProvider";
+import Switch from "react-switch";
+
 
 
 function SignUp() {
@@ -11,6 +16,7 @@ function SignUp() {
 
     const [error, setError] = useState(false);
 
+    const {Theme , ChangeTheme} =useTheme();
 
     function isPssEquel(pass: string, passConfirm: string) {
         return pass == passConfirm
@@ -24,13 +30,25 @@ function SignUp() {
 
     }
 
+    function ChangeThemeCompnent(){
+        return(
+            <div>
+                {/* <button onClick={ ChangeTheme} className={styles.buttonLight}>light</button>
+                <button onClick={ ChangeTheme } className={styles.buttonDark}>dark</button> */}
+                <Switch onChange={ChangeTheme} checked={Theme=='light' ? true : false }></Switch> Light theme
+            </div>
+        )
+    }
+
 
     return (
 
-        <div className={styles.container}>
+        <div className={`container ${Theme}`}>
             <div className={styles.card}>
                 <div className={styles.cardTitle}>
                     <h1>Sign Up</h1>
+                    <ChangeThemeCompnent/>
+                    <hr />
                 </div>
                 <div className={styles.cardContent}>
                     <form onSubmit={handlSubmit} className={styles.form}>

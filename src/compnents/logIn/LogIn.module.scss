@@ -1,25 +1,31 @@
 .container{
-    /* background-color: green; */
     height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    background: var(--theme-page-background);
+    color: var(--theme-page-text);
+    // border: var(--theme-page-text) 1px solid;
 }
 .card{
-    background-color: rgb(112 138 220 / 25%);
+    // background-color: rgb(112 138 220 / 25%);
     width: 50%;
     height: 450px;
     display: grid;
     grid-auto-rows: 1fr 3fr 0.8fr;
     overflow-y: auto;
+    background: var(--theme-page-background);
+    color: var(--theme-page-text);
+    border: var(--theme-page-text) 1px solid;
+
 }
 .cardTitle{
-    background-color: rgb(2 28 111 / 90%);
+    // background-color: rgb(2 28 111 / 90%);
     width: 100%;
     text-align: center;
-    color: #f2f2f5;
 }
 .cardContent{
     /* background-color: burlywood; */
@@ -37,8 +43,8 @@
     flex-direction: column;
 }
 
-
 .form{
+    /* background-color: red; */
     display: flex;
     height: 70%;
     flex-direction: column;
@@ -47,6 +53,7 @@
     /* min-width: 500px; */
     height: 100%;
     justify-content: space-evenly;
+
 }
 label{
     height:30px;
@@ -54,8 +61,9 @@ label{
     width: 50%;
 }
 input{
-    height: 40px;
+    height: 33px !important;
     width: 50%;
+    /* background-color: green; */
 }
 button{
     height: 40px;
@@ -67,4 +75,9 @@ button{
 }
 .signup:hover{
     color:red;
+}
+.langugeButton{
+    background:var(--theme-page-text);
+    color: var(--theme-page-background); 
+    margin: 2px;
 }

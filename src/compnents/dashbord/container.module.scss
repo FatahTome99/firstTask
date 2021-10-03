@@ -1,0 +1,10 @@
+.container{
+    height: 600px;
+    /* background-color: burlywood; */
+    display: flex;
+    flex-direction: column;
+    box-sizing:border-box;
+    background: var(--theme-page-background);
+    color: var(--theme-page-text);
+    
+  }
