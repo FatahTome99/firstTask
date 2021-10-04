@@ -4,9 +4,10 @@
 			"EmailLabel": "Enter Your Email",
 			"PassLabel": "Enter Your Password",
 			"Signup": "If you don't have account",
-			"click": "Click here"
+			"click": "Click here",
+            "Failed" : "LogIn Failed"
+
 		},
-		"form": "",
 		"title": "LogIn"
 	}
 }
