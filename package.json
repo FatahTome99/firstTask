@@ -5,7 +5,6 @@
   "dependencies": {
     "@super-effective/react-color-picker": "^2.1.2",
     "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "@types/jest": "^26.0.24",
     "@types/node": "^12.20.26",
@@ -23,8 +22,12 @@
     "rc-input-number": "^7.3.2",
     "react": "^17.0.2",
     "react-bootstrap-range-slider": "^3.0.2",
+    "react-chat-elements": "^10.16.0",
+    "react-chat-plugin": "^0.1.17",
+    "react-chat-ui": "^0.4.0",
     "react-color": "^2.19.3",
     "react-dom": "^17.0.2",
+    "react-firebase-hooks": "^3.0.4",
     "react-i18next": "^11.12.0",
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.3.0",
@@ -61,6 +64,10 @@
     ]
   },
   "devDependencies": {
-    "@types/react-color": "2.17.3"
+    "@testing-library/react": "^11.2.7",
+    "@types/react-color": "2.17.3",
+    "cypress": "^8.6.0",
+    "cypress-file-upload": "^5.0.8",
+    "first-input-delay": "^0.1.3"
   }
 }

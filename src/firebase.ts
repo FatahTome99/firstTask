@@ -1,6 +1,10 @@
 import firebase from 'firebase/app'
+import 'firebase/analytics';
+import 'firebase/auth';
 import "firebase/database"
-import "firebase/auth"
+import "firebase/auth" 
+import "firebase/performance";
+import 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAEoBb1_fnHXoJEjA-ToUSR5aanufXVn3k",
@@ -14,8 +18,12 @@ const firebaseConfig = {
   
   firebase.initializeApp(firebaseConfig);
   var database = firebase.database().ref()
+  const perf = firebase.performance();
+  
+  export const db = firebase.firestore();
+  export const auth = firebase.auth();  
+  export const firebaseAnalytics = firebase.analytics();
+  export default firebase
   
 
   export {}
-  export const auth = firebase.auth();
-  export default firebase

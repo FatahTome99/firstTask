@@ -1,21 +1,25 @@
-import React, { useState, useRef, Suspense } from "react";
+import React, { useState, useRef, Suspense, useEffect } from "react";
 import styles from "../logIn/LogIn.module.scss";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider";
-import { ThemeProvider, useTheme } from "../../context/ThemeProvider";
-// import i18next from 'i18next';
+import { useTheme } from "../../context/ThemeProvider";
 import { useTranslation } from "react-i18next";
 import '../logIn/LogIn.module.scss'
 import '../../style/theme.scss';
 import Switch from "react-switch";
 import {useFormik } from 'formik';
 import * as yup from "yup"
+import { firebaseAnalytics  } from "../../firebase";
 
 import ns from '../../translations/en/common.json';
-
+// import { getAnalytics } from "firebase/analytics";
 
 
 export default function LogIn() {
+
+    useEffect(()=>{
+        firebaseAnalytics.logEvent("Login_visited")
+    },[])
 
     const { Theme, ChangeTheme } = useTheme();
 
@@ -25,26 +29,29 @@ export default function LogIn() {
     const history = useHistory()
 
     const [error, setError] = useState(false);
-    const { login } = useAuth()
+    const { login  , loginWithGoole} = useAuth()
     const [loading, setLoading] = useState(false)
 
     const [LeftAlign, setLeftAlign] = useState(true);
 
     async function handlSubmit(values :any) {
-        // event.preventDefault();
-        
         setError(false);
         try {
             setLoading(true)
             await login(values.email,values.pass)
             console.log("ok")
             history.push("dashboard")
+            firebaseAnalytics.logEvent("login" )
         }
         catch {
             console.log("no")
             setError(true);
         }
         setLoading(false)
+    }
+
+    function loginGoogle(){
+        loginWithGoole()
     }
 
     const [t, i18n] = useTranslation("common");
@@ -134,7 +141,9 @@ export default function LogIn() {
                                     <div>{formik.errors.pass}</div>
                                 ) : null}
 
-                                <button type="submit">{t('LogIn.title')}</button>
+                                <button id="submit" type="submit">{t('LogIn.title')}</button> 
+                                <button onClick={loginGoogle}>{t('LogIn.LoginWithGoogle')}</button>
+
                             </form>
                             <div><label htmlFor="" >{error ? t("LogIn.Form.Failed") : ""}</label></div>
                             
@@ -152,9 +161,10 @@ export default function LogIn() {
 
                         </div>
 
-                        <div className={styles.cardTail}>{t('LogIn.Form.Signup')}<Link to="/signup">{t('LogIn.Form.click')}</Link></div>
+                        <div className={styles.cardTail}>{t('LogIn.Form.Signup')}<Link id="signup"to="/signup">{t('LogIn.Form.click')}</Link></div>
                     </div>
                 </div>
             </div>
     )
 }
+

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react"
 import { ThemeContext } from "../context/ThemeContext";
 
-import { auth } from "../firebase"
+import { auth, firebaseAnalytics } from "../firebase"
 
 export function useTheme() {
   return useContext(ThemeContext)
@@ -11,13 +11,18 @@ export const ThemeProvider : React.FC<{}> = ({ children }) =>  {
   const [Theme, setTheme] = useState('light')
 
   function ChangeTheme() {
-      if(Theme=='light')
+    console.log("hi hi theme")
+      if(Theme=='light'){
+        firebaseAnalytics.logEvent("Change_Theme" , {'Theme' :'dark'})
         setTheme('dark');
-     else
+        console.log('hi theme')
+
+      }
+     else{
         setTheme('light')
+        firebaseAnalytics.logEvent("Change_Theme" , {'Theme' :'light'})
 
-
-    
+      }
   }
 
   return (

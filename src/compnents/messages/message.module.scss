@@ -1,0 +1,96 @@
+
+.chat{
+    width: 700px;
+    height: 500px;
+     background-color: cornsilk;
+    margin: 400px 0;
+  display: flex;
+  flex-direction: column;
+  // overflow-y: scroll;
+  position: absolute;
+  border: 1px rgb(20, 2, 85) solid;
+  margin-top: 50px;
+  z-index: 10;
+}
+.chatMessages{
+  width: 700px;
+  height: 80%;
+   background-color: cornsilk;
+  // margin: 400px 0;
+display: flex;
+flex-direction: column-reverse;
+overflow-y: scroll;
+position: absolute;
+border: 1px rgb(20, 2, 85) solid;
+margin: 0px;
+margin-bottom: 54px;
+// margin-top: 50px;
+padding: 0px
+}
+.sent {
+    display: flex;
+  padding: 10px;
+  margin: 2px;
+  border-radius: 3000px;
+  align-items: center;
+    background-color: #395dff;
+    color: white;
+    border-top-right-radius: 1000px;
+    flex-direction: row-reverse;
+    text-align: end;
+    float: right;
+    
+  }
+  
+  .received {
+    padding: 10px;
+    margin: 2px;
+    border-radius: 3000px;
+    align-items: center;
+    border: 1px solid lightgray;
+    background-color: #FAFAFA;
+    border-top-left-radius: 1000px;
+    float: left;
+    background-color: #a8aaf9;
+    display: flex;
+
+
+  }
+  p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    margin: 10px;
+    overflow-wrap: break-word;
+  }
+
+  .sendMsg {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    margin-bottom: 0px;
+    // z-index: 100;
+    border-top: 1px solid lightgray;
+    background-color: #ede7ce;
+    bottom: 0;
+    height: 20%;
+    justify-content: space-between;
+    box-shadow: #c39595 1px -1px 1px;
+
+
+  }
+  .sendMsg input{
+    width: 400px;
+    height: 55px;
+    margin: 10px;
+    margin-right: 45px;
+
+  }
+  .id{
+    font-size: 10px;
+  }
+  ul{
+    list-style-type: none; /* Remove bullets */
+ // padding: 0; /* Remove padding */
+ // margin: 0; /* Remove margins */
+  }

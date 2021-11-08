@@ -6,5 +6,6 @@ export const AuthContext = React.createContext({
 
     login: (email: string, password: string) => { },
     signup: (email: string, password: string) => { },
-    logout: () => { }
+    logout: () => { },
+    loginWithGoole: () =>{ }
 });

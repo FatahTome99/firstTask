@@ -6,7 +6,6 @@ declare module 'react-i18next' {
     defaultNS: 'common_en';
     resources: {
       common: typeof common_en;
-    // ns :string
     };
   };
 };

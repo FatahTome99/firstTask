@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { auth } from "../../firebase";
+import React, { useEffect, useState } from "react";
+import { auth, db, firebaseAnalytics } from "../../firebase";
 import styles from "../signup/signup.module.scss"
 import { Link } from "react-router-dom"
 import '../../style/theme.scss';
@@ -9,12 +9,12 @@ import Switch from "react-switch";
 import { useAuth } from "../../context/AuthProvider";
 import { useFormik } from "formik";
 import * as yup from "yup"
-import { string } from "yup/lib/locale";
-
-
-
 
 function SignUp() {
+
+    useEffect(()=>{
+        firebaseAnalytics.logEvent("Signup_visited")
+    },[])
    
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false)
@@ -31,14 +31,18 @@ function SignUp() {
             setLoading(true)
             await signup(values.email, values.pass)
             console.log("ok")
+            firebaseAnalytics.logEvent("signup" )
+            const id =auth.currentUser?.uid;
+            await db.collection('Users').add({
+                UserName: values.userName,
+                id,
+            })
         }
         catch {
             console.log("no")
             setError(true);
         }
         setLoading(false)
-
-
     }
 
     function ChangeThemeCompnent() {
@@ -53,11 +57,14 @@ function SignUp() {
     const formik = useFormik({
         initialValues: {
             email: '',
+            userName:'',
             pass: '',
             confirmPass: ''
+
         },
         validationSchema: yup.object({
             email: yup.string().email('Invalid email address').required('Required'),
+            userName:yup.string().max(10,'User name too long').required('Required'),
             pass: yup.string().min(4, 'Pass is too short').required('Required'),
             confirmPass: yup.string().min(4, 'Pass is too short').required('Required').oneOf([yup.ref('pass'), null], "password dosnt mach")
         }),
@@ -77,8 +84,21 @@ function SignUp() {
                         <ChangeThemeCompnent />
                         <hr />
                     </div>
-                    <div className={styles.cardContent}>
+                    <div className={styles.cardContent} data-cy="/signupCard">
                         <form onSubmit={formik.handleSubmit} className={styles.form}>
+                        <label htmlFor="userName">User Name</label>
+                            <input
+                                id="userName"
+                                name="userName"
+                                type="text"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.userName}
+                            />
+                            {formik.touched.userName && formik.errors.userName ? (
+                                <div>{formik.errors.userName}</div>
+                            ) : null}
+
                             <label htmlFor="email">Email Address</label>
                             <input
                                 id="email"
@@ -91,6 +111,7 @@ function SignUp() {
                             {formik.touched.email && formik.errors.email ? (
                                 <div>{formik.errors.email}</div>
                             ) : null}
+
 
                             <label htmlFor="pass">Password</label>
                             <input
@@ -137,7 +158,7 @@ function SignUp() {
 
                     </div>
                     <div className={styles.cardTail}>
-                        if you have acount <Link to="/login">Click</Link>
+                        if you have acount <Link data-cy="/login" to="/login">Click</Link>
 
                     </div>
                 </div>

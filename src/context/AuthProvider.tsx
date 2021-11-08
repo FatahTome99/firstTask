@@ -1,4 +1,5 @@
- import React, { useContext, useState, useEffect } from "react"
+ import firebase from "firebase";
+import React, { useContext, useState, useEffect } from "react"
 import { AuthContext } from "../context/AuthContext";
 
 import { auth } from "../firebase"
@@ -20,7 +21,10 @@ console.log("user  " +currentUser)
   function login(email : string, password : string) {
     return auth.signInWithEmailAndPassword(email, password)
   }
-
+  function loginWithGoole() {
+    const provider = new firebase.auth.GoogleAuthProvider()
+     auth.signInWithPopup(provider)
+  }
   function logout() {
     console.log("signout")
     return auth.signOut()
@@ -38,7 +42,7 @@ console.log("user  " +currentUser)
 
 
   return (
-    <AuthContext.Provider value= {{currentUser , login , signup , logout}} >
+    <AuthContext.Provider value= {{currentUser , login , signup , logout , loginWithGoole}} >
       {!loading && children}
 
     </AuthContext.Provider>

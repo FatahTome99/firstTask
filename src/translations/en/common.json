@@ -8,6 +8,8 @@
             "Failed" : "LogIn Failed"
 
 		},
-		"title": "LogIn"
+		"title": "LogIn",
+		"LoginWithGoogle"  :"Login With Google"
+
 	}
 }

@@ -15,6 +15,7 @@ import { ThemeProvider } from './context/ThemeProvider';
 import common_ar from "./translations/ar/common.json";
 import common_en from "./translations/en/common.json";
 import i18next from 'i18next';
+import Messages from './compnents/messages/Messages';
 
 const SignUp = lazy(() => import('./compnents/signup/SignUp'));
 const LogIn = lazy(() => import('./compnents/logIn/LogIn'));
@@ -39,17 +40,16 @@ ReactDOM.render(
       <Router>
         <ThemeProvider>
           <AuthProvider>
-
             <Suspense fallback={<div>Loading...</div>}>
+
               <Switch>
-                {/* <PublicRoute path="/"><LogIn/></PublicRoute> */}
                 <PublicRoute path="/signup"><SignUp /></PublicRoute>
                 <PublicRoute exact path={["/", "/login"]}><LogIn /></PublicRoute>
-                {/* <Route  path="/login" component={LogIn}/> */}
-                <PrivateRoute path="/dashboard"> <DashBoard /> </PrivateRoute>
+                <PrivateRoute path="/dashboard"> <DashBoard /> </PrivateRoute >
+                {/* <PrivateRoute path="/chat"> <Messages /> </PrivateRoute > */}
               </Switch>
+           
             </Suspense>
-
           </AuthProvider>
         </ThemeProvider>
       </Router>
@@ -57,8 +57,4 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
